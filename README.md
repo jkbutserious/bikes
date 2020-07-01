@@ -1,8 +1,8 @@
 # _Title_
-#### _Brief Desc., Date_
-#### By _**Kyle Hubbard**_
+#### _Site will help users sort through reported stolen bikes, 7/1/2020_
+#### By _**Kyle Hubbard, Spencer Moody, and Jeff Kim**_
 ## Description
-_Enter text here_
+_A simple site that uses the Bike Index API to search for bikes. We made this site in order to practice making API calls_
 
 ## Specifications
 
@@ -35,7 +35,7 @@ _Enter text here_
 * _Optional: code editor - suggested VSCode-_
 
 #### Install
-* _Navigate to my github repository at: https://github.com/repo-name-here_
+* _Navigate to my github repository at: https://github.com/hubba180/bikes_
 * _Click the green clone or download button and copy the ".git" link_
 * _On your homescreen open up your preferred terminal - GitBash recommended - and clone the file to your desktop. If your using GitBash the command is $ git clone {.git link}_
 * _Navigate your terminal into the root directory of the project and run the command $ npm install_
