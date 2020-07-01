@@ -4,28 +4,6 @@
 ## Description
 _A simple site that uses the Bike Index API to search for bikes. We made this site in order to practice making API calls_
 
-## Specifications
-
-**Behavior** _Spec_
-* Input: 
-* Output: 
-* Complete: 
-
-**Behavior** _Spec_
-* Input: 
-* Output: 
-* Complete:
-
-**Behavior** _Spec_
-* Input: 
-* Output: 
-* Complete:
-
-**Behavior** _Spec_
-* Input: 
-* Output: 
-* Complete:
-
 ## Setup/Installation Requirements
 
 #### Requirements
