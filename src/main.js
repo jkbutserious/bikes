@@ -2,7 +2,10 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import { getBike } from './assests/buinesslogic.js';
+import { getBike } from './assets/buinesslogic.js';
+import { randomWords } from './assets/buinesslogic.js';
+import { dinoipsum } from '.assets/buinesslogic.js';
+import { ncovid } from '.assets/buinesslogic.js';
 
 // in .env API_KEY and SECRET
 // let request = new XMLHttpRequest();
@@ -26,12 +29,45 @@ async function getBikeTraits(city) {
   }
 }
 
+async function displayRandomWords() {
+  const properlyNamedVariable = await randomWords();
+  if (properlyNamedVariable === false) {
+    $("#randomPhrase").text("That bugs the shit out of me");
+  } else {
+    $("#randomPhrase").text(`${properlyNamedVariable}`);
+  }
+}
+
+
+async function dinoipsumBig() {
+  const theRealdino = await dinoipsum();
+  if (theRealdino === false) {
+    $("#dinovalue").text("hahahaha you can not eat me");
+    } else {
+      $("#dinovalue").text(`${theRealdino}`);
+    } 
+}
+
+async function ncovidnine() {
+  const covidnine = await ncovid();
+  if (covidnine === false) {
+    $("#").text("At least its not an astroid.");
+    } else {
+      $("#").text(`${covidnine}`);
+    }
+}
+
+
+
 $(document).ready(function() {
-  $("#bikeInfo").click(function() {
+  $("#bikeInfon").click(function() {
     let city = $("#location").val();
     $("#location").val("");
 
     getBikeTraits(city);
+    displayRandomWords();
+    dinoipsumBig();
+    ncovidnine();
 
     // (async () => {
     //   try {
