@@ -46,7 +46,8 @@ export async function dinoipsum() {
 
 export async function ncovid() {
   try {
-    let covidInfo = await fetch(`https://covid19-us-api.herokuapp.com/county`);
+    let covidInfo = await fetch(`https://covid19-us-api.herokuapp.com/stats
+    `);
     let covidInfoResponse; 
     if (covidInfo.ok && covidInfo.status == 200)  {
     covidInfoResponse = await covidInfo.json();

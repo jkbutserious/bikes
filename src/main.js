@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { getBike } from './assets/buinesslogic.js';
 import { randomWords } from './assets/buinesslogic.js';
-import { dinoipsum } from '.assets/buinesslogic.js';
-import { ncovid } from '.assets/buinesslogic.js';
+import { dinoipsum } from './assets/buinesslogic.js';
+import { ncovid } from './assets/buinesslogic.js';
 
 // in .env API_KEY and SECRET
 // let request = new XMLHttpRequest();
@@ -43,24 +43,25 @@ async function dinoipsumBig() {
   const theRealdino = await dinoipsum();
   if (theRealdino === false) {
     $("#dinovalue").text("hahahaha you can not eat me");
-    } else {
-      $("#dinovalue").text(`${theRealdino}`);
-    } 
+  } else {
+    $("#dinovalue").text(`${theRealdino}`);
+  } 
 }
 
 async function ncovidnine() {
   const covidnine = await ncovid();
   if (covidnine === false) {
-    $("#").text("At least its not an astroid.");
+    $("#covidStuff").text("At least its not an astroid.");
     } else {
-      $("#").text(`${covidnine}`);
+      console.log(covidnine)
+      $("#covidStuff").text(`${covidnine.message.deaths}`);
     }
 }
 
 
 
 $(document).ready(function() {
-  $("#bikeInfon").click(function() {
+  $("#bikeInfo").click(function() {
     let city = $("#location").val();
     $("#location").val("");
 
