@@ -2,11 +2,10 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-
+import { getBike } from './assests/buinesslogic.js';
 
 // in .env API_KEY and SECRET
 // let request = new XMLHttpRequest();
-
 
 // function getElements(response) {
 //   if (response.proximity) {
@@ -18,31 +17,42 @@ import './styles.css';
 //   }
 // }
 
+async function getBikeTraits(city) {
+  const jsonifiedResponse = await getBike(city);
+  if (jsonifiedResponse === false) {
+    $("#stolenBikeCount").text("I'm sorry, something went wrong with your request")
+  } else {
+    $("#stolenBikeCount").text(`Total Bikes: ${jsonifiedResponse.proximity}`);
+  }
+}
+
 $(document).ready(function() {
   $("#bikeInfo").click(function() {
     let city = $("#location").val();
     $("#location").val("");
 
-    (async () => {
-      try {
-      let response = await fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`);
-      let jsonifiedResponse;
-      if (response.ok && response.status == 200) {
-        jsonifiedResponse = await response.json();
-      } else {
-        jsonifiedResponse = false;
-      }
-      getElements(jsonifiedResponse);
-      } catch(error) {
-        getElements(false);
-      }
-    })();
+    getBikeTraits(city);
 
-    const getElements = function(response) {
-      if (response) {
-        $("#stolenBikeCount").text(`Total Bikes: ${response.proximity}`);
-      }
-    }
+    // (async () => {
+    //   try {
+    //   let response = await fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`);
+    //   let jsonifiedResponse;
+    //   if (response.ok && response.status == 200) {
+    //     jsonifiedResponse = await response.json();
+    //   } else {
+    //     jsonifiedResponse = false;
+    //   }
+    //   getElements(jsonifiedResponse);
+    //   } catch(error) {
+    //     getElements(false);
+    //   }
+    // })();
+
+    // const getElements = function(response) {
+    //   if (response) {
+    //     $("#stolenBikeCount").text(`Total Bikes: ${response.proximity}`);
+    //   }
+    // }
     
     // fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`)
     // .then(function(response) {
