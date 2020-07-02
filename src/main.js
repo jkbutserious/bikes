@@ -8,35 +8,57 @@ import './styles.css';
 // let request = new XMLHttpRequest();
 
 
-function getElements(response) {
-  if (response.proximity) {
-    $("#stolenBikeCount").text(`Total Bikes: ${response.proximity}`);
-    $('.showErrors').text("");
-  } else {
-    $("#stolenBikeCount").text("");
-    $('.showErrors').text(`There was an error: ${response.message}`);
-  }
-}
+// function getElements(response) {
+//   if (response.proximity) {
+//     $("#stolenBikeCount").text(`Total Bikes: ${response.proximity}`);
+//     $('.showErrors').text("");
+//   } else {
+//     $("#stolenBikeCount").text("");
+//     $('.showErrors').text(`There was an error: ${response.message}`);
+//   }
+// }
+
 $(document).ready(function() {
   $("#bikeInfo").click(function() {
     let city = $("#location").val();
     $("#location").val("");
-    
-    fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`)
-    .then(function(response) {
-      console.log(response)
-      if (!response.ok) {
-        throw Error(response.statusText);
+
+    (async () => {
+      try {
+      let response = await fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`);
+      let jsonifiedResponse;
+      if (response.ok && response.status == 200) {
+        jsonifiedResponse = await response.json();
+      } else {
+        jsonifiedResponse = false;
       }
-      return response.json();
-    })
-    .catch(function(error) {
-      return error;
-    })
-    .then(function(jsonifiedResponse) {
-      console.log(jsonifiedResponse);
       getElements(jsonifiedResponse);
-    });
+      } catch(error) {
+        getElements(false);
+      }
+    })();
+
+    const getElements = function(response) {
+      if (response) {
+        $("#stolenBikeCount").text(`Total Bikes: ${response.proximity}`);
+      }
+    }
+    
+    // fetch(`https://bikeindex.org:443/api/v3/search/count?location=${city}&distance=10&stolenness=stolen&appid=${process.env.API_KEY}`)
+    // .then(function(response) {
+    //   console.log(response)
+    //   if (!response.ok) {
+    //     throw Error(response.statusText);
+    //   }
+    //   return response.json();
+    // })
+    // .catch(function(error) {
+    //   return error;
+    // })
+    // .then(function(jsonifiedResponse) {
+    //   console.log(jsonifiedResponse);
+    //   getElements(jsonifiedResponse);
+    // });
 
 
     // let promise = new Promise(function(resolve, reject) {
@@ -60,4 +82,4 @@ $(document).ready(function() {
   //     $("#stolenBikeCount").text(`There was an error processing your request: ${error}`);
   //   })
   });
-});
+});  
